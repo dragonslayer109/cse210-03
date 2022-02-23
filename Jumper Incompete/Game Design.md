@@ -25,7 +25,7 @@ set_file():None
 
 Class: Player
 ---
-
+-guesses letters in the word
 ---
 
 ---
