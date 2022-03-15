@@ -1,6 +1,6 @@
 from Game.secret import Secret 
 from Game.player import Player
-from Game.player import Jumper
+from Game.jumper import Jumper
 class Director:
     """
     Directs the gameplay of the game
