@@ -64,8 +64,9 @@ class Director:
             if self.guess == self._secret:
                 self.player.update #will change based on player calls made
             else:
-                self.jumper.update #will change based on jumper calls made
-                self.lives -= 1
+                self.lives -= self.jumper.update 
                 if self.lives == 0:
+                    self.player.display
+                    self.jumper.display
                     self.set_playing()
                 
