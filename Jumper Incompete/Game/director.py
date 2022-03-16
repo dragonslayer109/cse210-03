@@ -1,4 +1,4 @@
-from Game.secret import Secret 
+from Game.secret import Secret
 from Game.player import Player
 from Game.jumper import Jumper
 class Director:
@@ -24,6 +24,7 @@ class Director:
         self.lives = 4
         self.get_secret()
         self.num_letters = len(self._secret)
+        print(self.num_letters)
         self.player.create_word(self.num_letters)
         while self._is_playing == True:
             self.get_prompt()
@@ -33,7 +34,8 @@ class Director:
         """
         Get the secret word for secret class
         """
-        self._secret = self.secrets.get_word
+        self._secret = self.secrets.get_word()
+        print(self._secret)
     
     def set_playing(self):
         """
@@ -47,8 +49,8 @@ class Director:
         """
         if not self._is_playing:
             return 
-        self.player.display() #will change based on player calls made
-        self.jumper.display(self.lives) #will change based on jumper calls made
+        self.player.display() 
+        self.jumper.display(self.lives) 
         self.guess = input("Guess a letter [a-z]: ")
 
     def do_updates(self):

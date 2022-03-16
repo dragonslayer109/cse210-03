@@ -11,18 +11,15 @@ class Player:
         """
         Creates the array from the number of letters in the secret
         """
-        i = number
-        while i > -1:
-            self.word[i] = "_"
-            i -= 1
+        self.word = ["_"] * number
 
     def display(self):
         """
         Displays the word array
         """
         iw = 0
-        for iw in self._word:
-            print(f"{self._word[iw]} ")
+        for iw in self.word:
+            print(iw)
 
     def update(self, index, letter):
         """
