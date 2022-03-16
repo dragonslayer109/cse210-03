@@ -6,14 +6,15 @@ class Director:
     Directs the gameplay of the game
     """
     def __init__(self):
-        self._secret = ""
+        self._secret = []
+        self.num_letters = 0
         self.secrets = Secret()
         self._is_playing = True
         self._player_word = ""
         self.player = Player()
         self.guess = ""
-        self.jumper = Jumper()
         self.lives = 0
+        self.jumper = Jumper()
 
     
     def start_game(self):
@@ -22,6 +23,8 @@ class Director:
         """
         self.lives = 4
         self.get_secret()
+        self.num_letters = len(self._secret)
+        self.player.create_word(self.num_letters)
         while self._is_playing == True:
             self.get_prompt()
             self.do_updates()
@@ -31,7 +34,6 @@ class Director:
         Get the secret word for secret class
         """
         self._secret = self.secrets.get_word
-        print(self._secret)
     
     def set_playing(self):
         """
@@ -45,8 +47,8 @@ class Director:
         """
         if not self._is_playing:
             return 
-        self.player.display #will change based on player calls made
-        self.jumper.display #will change based on jumper calls made
+        self.player.display() #will change based on player calls made
+        self.jumper.display(self.lives) #will change based on jumper calls made
         self.guess = input("Guess a letter [a-z]: ")
 
     def do_updates(self):
@@ -60,13 +62,16 @@ class Director:
         """
         if not self._is_playing:
             return 
+        
+        i = 0
         for i in self._secret:
-            if self.guess == self._secret:
-                self.player.update #will change based on player calls made
+            if self.guess == self._secret[i]:
+                self.player.update(i, self.guess)
+                i += 1
             else:
-                self.lives -= self.jumper.update 
+                self.lives -= self.jumper.update()
                 if self.lives == 0:
-                    self.player.display
-                    self.jumper.display
+                    self.player.display(self.num_letters)
+                    self.jumper.display(self.lives)
                     self.set_playing()
                 
