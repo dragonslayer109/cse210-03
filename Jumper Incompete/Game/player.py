@@ -1,4 +1,4 @@
-from director import Director
+
 
 class Player:
     """

@@ -1,4 +1,4 @@
-from director import Director
+
 
 class Jumper:
     def __init__(self, ):
