@@ -31,6 +31,7 @@ class Director:
         Get the secret word for secret class
         """
         self._secret = self.secrets.get_word
+        print(self._secret)
     
     def set_playing(self):
         """
