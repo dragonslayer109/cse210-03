@@ -21,10 +21,11 @@ class Director:
         """
         Initialises the start of the game and runs it
         """
+        if not self._is_playing:
+            return 
         self.lives = 4
         self.get_secret()
         self.num_letters = len(self._secret)
-        print(self.num_letters)
         self.player.create_word(self.num_letters)
         while self._is_playing == True:
             self.get_prompt()
@@ -35,13 +36,13 @@ class Director:
         Get the secret word for secret class
         """
         self._secret = self.secrets.get_word()
-        print(self._secret)
+        #print(self._secret)
     
     def set_playing(self):
         """
         sets alive to False
         """
-        self._is_playing == False
+        self._is_playing = False
 
     def get_prompt(self):
         """
@@ -52,6 +53,8 @@ class Director:
         self.player.display() 
         self.jumper.display(self.lives) 
         self.guess = input("Guess a letter [a-z]: ")
+        #print(self.guess)
+        #print(self._secret[0])
 
     def do_updates(self):
         """
@@ -64,16 +67,18 @@ class Director:
         """
         if not self._is_playing:
             return 
-        
+        checker = 0
         i = 0
-        for i in self._secret:
+        for i in range(0, len(self._secret)):
+            #print(i)
             if self.guess == self._secret[i]:
                 self.player.update(i, self.guess)
-                i += 1
-            else:
-                self.lives -= self.jumper.update()
-                if self.lives == 0:
-                    self.player.display(self.num_letters)
-                    self.jumper.display(self.lives)
-                    self.set_playing()
+                checker += 1
+        if checker == 0:        
+            self.lives -= self.jumper.update()
+            if self.lives == 0:
+                self.player.display()
+                self.jumper.display(self.lives)
+                self.set_playing()
+                
                 

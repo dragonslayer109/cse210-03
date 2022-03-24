@@ -17,9 +17,10 @@ class Player:
         """
         Displays the word array
         """
-        iw = 0
-        for iw in self.word:
-            print(iw)
+        for i in self.word:
+            print(i, end=" ")
+        print("\n")
+ 
 
     def update(self, index, letter):
         """

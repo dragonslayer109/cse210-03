@@ -52,7 +52,7 @@ class Jumper:
             print(self._line_7)
             print("")
             print(self._line_8)
-        else:
+        if self.check == 0:
             self.get_alive()
             print(self._line_5 + self._alive)
             print(self._line_6)
