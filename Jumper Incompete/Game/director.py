@@ -15,6 +15,7 @@ class Director:
         self.guess = ""
         self.lives = 0
         self.jumper = Jumper()
+        self.guessed = False
 
     
     def start_game(self):
@@ -68,6 +69,7 @@ class Director:
         if not self._is_playing:
             return 
         checker = 0
+
         i = 0
         for i in range(0, len(self._secret)):
             #print(i)
@@ -80,5 +82,13 @@ class Director:
                 self.player.display()
                 self.jumper.display(self.lives)
                 self.set_playing()
-                
-                
+
+        j = 0
+        for j in range (0, len(self._secret)):
+            if self._secret[j] == self.player.word[j]:
+                self.guessed = True
+            else:
+                self.guessed = False
+
+        if self.guessed:
+            self.set_playing()
